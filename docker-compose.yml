@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mssql-server:
+    build: 
+      context: .
+      args:
+        - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
+    container_name: seample-mssql
+    restart: unless-stopped
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
+      - MSSQL_PID=Express
+      - MSSQL_TCP_PORT=1433
+    volumes:
+      - mssql_data:/var/opt/mssql
+      - ./init-schema.sql:/scripts/init-schema.sql
+    networks:
+      - ai-network
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -Q 'SELECT 1'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    # Esegue lo script di inizializzazione dopo l'avvio
+    command: >
+      bash -c "
+        /opt/mssql/bin/sqlservr &
+        sleep 30 &&
+        /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -i /scripts/init-schema.sql &&
+        wait"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  mssql_data:
+    driver: local
+
+networks:
+  ai-network:
+    driver: bridge
