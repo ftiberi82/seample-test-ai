@@ -17,11 +17,11 @@ services:
       - MSSQL_TCP_PORT=1433
     volumes:
       - mssql_data:/var/opt/mssql
-      - ./init-schema.sql:/scripts/init-schema.sql
+      - ./src/main/resources/db/podman_db_initialization.sql:/scripts/init-schema.sql
     networks:
       - ai-network
     healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -Q 'SELECT 1'"]
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -C -Q 'SELECT 1'"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -31,12 +31,8 @@ services:
       bash -c "
         /opt/mssql/bin/sqlservr &
         sleep 30 &&
-        /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -i /scripts/init-schema.sql &&
+        /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -C -i /scripts/podman_db_initialization.sql &&
         wait"
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 30s
 
 volumes:
   mssql_data:

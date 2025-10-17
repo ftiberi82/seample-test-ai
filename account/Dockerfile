@@ -14,7 +14,7 @@ USER root
 RUN mkdir -p /scripts
 
 # Copia script di inizializzazione
-COPY scripts/init-schema.sql /scripts/
+COPY src/main/resources/db/podman_db_initialization.sql /scripts/
 
 # Espone la porta standard di SQL Server
 EXPOSE 1433
