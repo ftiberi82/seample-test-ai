@@ -33,3 +33,10 @@ build/
 .vscode/
 /mvnw
 /mvnw.cmd
+
+### Database ###
+data/
+*.bak
+*.mdf
+*.ldf
+

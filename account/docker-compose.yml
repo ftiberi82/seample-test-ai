@@ -15,28 +15,36 @@ services:
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
       - MSSQL_PID=Express
       - MSSQL_TCP_PORT=1433
+      - MSSQL_ENABLE_HADR=0
     volumes:
-      - mssql_data:/var/opt/mssql
       - ./src/main/resources/db/podman_db_initialization.sql:/scripts/init-schema.sql
+      - ./data:/var/opt/mssql/data
     networks:
       - ai-network
     healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -C -Q 'SELECT 1'"]
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $${MSSQL_SA_PASSWORD} -C -Q 'SELECT 1' || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 30s
+      start_period: 60s
     # Esegue lo script di inizializzazione dopo l'avvio
     command: >
       bash -c "
         /opt/mssql/bin/sqlservr &
-        sleep 30 &&
-        /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -C -i /scripts/podman_db_initialization.sql &&
-        wait"
+        pid=$$!
+        echo 'Waiting for SQL Server to start...'
+        for i in {1..60}; do
+          /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $${MSSQL_SA_PASSWORD} -C -Q 'SELECT 1' > /dev/null 2>&1 && break
+          echo 'Still waiting...'
+          sleep 1
+        done
+        echo 'Running initialization script...'
+        /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $${MSSQL_SA_PASSWORD} -C -i /scripts/init-schema.sql
+        echo 'Initialization complete!'
+        wait $$pid
+      "
 
 volumes:
-  mssql_data:
-    driver: local
 
 networks:
   ai-network:
