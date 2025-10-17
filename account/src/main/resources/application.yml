@@ -19,6 +19,16 @@ spring:
         format_sql: true
     database-platform: org.hibernate.dialect.SQLServerDialect
 
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    table: flyway_history
+    default-schema: top-secret
+    schemas: top-secret
+    locations: classpath:db/migration
+    mixed: true
+    validate-on-migrate: true
+
 server:
   port: 8080
   servlet:
