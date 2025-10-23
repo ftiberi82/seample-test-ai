@@ -1,0 +1,53 @@
+---
+config:
+  look: neo
+  layout: elk
+---
+erDiagram
+    ORGANIZATION_TYPE {
+        guid id PK
+        int order UK
+        varchar name "NOT NULL"
+        varchar description
+    }
+    ORGANIZATION {
+      guid id PK
+      varchar name UK "NOT NULL"
+      varchar description
+      guid organization_type_id FK "NOT NULL"
+      varchar pid FK
+    }
+    ACCOUNT {
+        guid id PK
+        varchar username UK "NOT NULL"
+        bit active "NOT NULL"
+    }
+    ROLE {
+        guid id PK
+        varchar name UK "NOT NULL"
+        varchar description
+    }
+    PERMISSION {
+        guid id PK
+        varchar name UK "NOT NULL"
+        varchar description
+    }
+    ROLE_PERMISSION {
+        guid role_id FK "NOT NULL"
+        guid permission_id FK "NOT NULL"
+    }
+    ACCOUNT_ROLE_ASSIGNMENT {
+        guid id PK
+        guid account_id FK "NOT NULL"
+        guid role_id FK "NOT NULL"
+        guid organization_id FK
+        bit active "NOT NULL"
+        datetime last_login
+    }
+    ORGANIZATION_TYPE ||--o{ ORGANIZATION : "1-n"
+    ORGANIZATION ||--o{ ORGANIZATION : "Parent-child"
+    ACCOUNT ||--o{ ACCOUNT_ROLE_ASSIGNMENT : "1-n"
+    ROLE ||--o{ ACCOUNT_ROLE_ASSIGNMENT : "1-n"
+    ORGANIZATION ||--o{ ACCOUNT_ROLE_ASSIGNMENT : "Scope"
+    ROLE ||--o{ ROLE_PERMISSION : "1-n"
+    PERMISSION ||--o{ ROLE_PERMISSION : "1-n"
