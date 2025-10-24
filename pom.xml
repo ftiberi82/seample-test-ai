@@ -6,7 +6,7 @@
 
   <groupId>com.example</groupId>
   <artifactId>hello-java21</artifactId>
-  <version>1.0.8-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <name>hello-java21</name>
   <description>Progetto di esempio Java 21 con Maven</description>
 
