@@ -23,7 +23,7 @@ stages:
 #
   # DEVELOP
   - ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
-    - template: java/stages/stage-gitflow-develop.yml@ci-templates
+    - template: java/stages/stage-gitflow-develop-pipeline.yml@ci-templates
 
   # FEATURE/, FIX/*
   - ${{ if and(or(startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/fix/')), eq(variables['Build.Reason'], 'Manual')) }}:
