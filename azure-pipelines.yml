@@ -7,10 +7,13 @@ trigger:
       - fix/*
       - release/*
       - hotfix/*
+    exclude: 
+    - 'main'
   paths:
     include:
-      - src/**
-      - pom.xml
+      - '*'
+    exclude:
+      - azure-pipelines.yml
 
 resources:
   repositories:
