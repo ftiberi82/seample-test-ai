@@ -6,7 +6,6 @@ trigger:
       - feature/*
       - release/*
       - hotfix/*
-      - prova_template
 
 resources:
   repositories:
@@ -18,21 +17,17 @@ resources:
 pool: LinuxPool
 
 stages:
-  # PROVA_TEMPLATE
-  - ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
-    - template: java/stages/stage-maven.yml@ci-templates
-
   # MAIN
 #  - ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
 #    - template: gitflow/stage-gitflow-main-pipeline.yml@ci-templates
 #
-#  # DEVELOP
-#  - ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
-#    - template: gitflow/stage-gitflow-develop-pipeline.yml@ci-templates
-#
-#  # FEATURE/, FIX/*
-#  - ${{ if and(or(startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/fix/')), eq(variables['Build.Reason'], 'Manual')) }}:
-#    - template: gitflow/stage-gitflow-develop-branches-with-deploy.yml@ci-templates
+  # DEVELOP
+  - ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
+    - template: java/stages/stage-gitflow-develop.yml@ci-templates
+
+  # FEATURE/, FIX/*
+  - ${{ if and(or(startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/fix/')), eq(variables['Build.Reason'], 'Manual')) }}:
+    - template: java/stages/stage-gitflow-develop-branches-with-deploy.yml@ci-templates
 #
 #  # RELEASE/*
 #  - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/release/') }}:
