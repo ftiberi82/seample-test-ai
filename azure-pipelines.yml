@@ -7,6 +7,10 @@ trigger:
       - fix/*
       - release/*
       - hotfix/*
+  paths:
+    include:
+      - src/**
+      - pom.xml
 
 resources:
   repositories:
