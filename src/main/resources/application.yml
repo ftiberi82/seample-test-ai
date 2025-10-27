@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: account-service
+  datasource:
+    url: ${database_url}
+    username: ${database_username}
+    password: ${database_password}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+    hikari:
+      minimum-idle: ${database_minimum_idle}
+      maximum-pool-size: ${database_maximum_pool_size}
+      connection-timeout: ${database_connection_timeout}
+      max-lifetime: ${database_max_lifetime}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: ${log_show_sql}
+    properties:
+      hibernate:
+        default-schema: ${database_schema}
+
+  flyway:
+    enabled: true
+    schemas:
+      - ${spring.jpa.properties.hibernate.default-schema}
+    placeholders:
+      schema: ${spring.jpa.properties.hibernate.default-schema}
+    placeholder-replacement: true
+    placeholder-prefix: '${'
+    placeholder-suffix: '}'
+
+server:
+  servlet:
+    context-path: /account
+
+logging:
+  level:
+    application: ${log_level_application}
+    root: ${log_level_root}
