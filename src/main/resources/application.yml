@@ -2,16 +2,16 @@ spring:
   application:
     name: account-service
   datasource:
-    url: ${database_url}
-    username: ${database_username}
-    password: ${database_password}
+    url: jdbc:sqlserver://db-sql-win01:1433;databaseName=master;encrypt=false;trustServerCertificate=true
+    username: sa
+    password: Accenture.1!
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
     hikari:
-      minimum-idle: ${database_minimum_idle}
-      maximum-pool-size: ${database_maximum_pool_size}
-      connection-timeout: ${database_connection_timeout}
-      max-lifetime: ${database_max_lifetime}
+      minimum-idle: 4
+      maximum-pool-size: 6
+      connection-timeout: 20000
+      max-lifetime: 30000
 
   jpa:
     hibernate:
@@ -19,7 +19,7 @@ spring:
     show-sql: ${log_show_sql}
     properties:
       hibernate:
-        default-schema: ${database_schema}
+        default-schema: account
 
   flyway:
     enabled: true
@@ -37,5 +37,5 @@ server:
 
 logging:
   level:
-    application: ${log_level_application}
-    root: ${log_level_root}
+    application: INFO
+    root: INFO
