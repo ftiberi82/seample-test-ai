@@ -14,10 +14,6 @@ trigger:
     exclude:
       - azure-pipelines.yml
 
-variables:
-  - name: SONAR_TOKEN
-    value: $(SONAR_TOKEN)
-
 resources:
   repositories:
     - repository: ci-templates        # alias a tua scelta
