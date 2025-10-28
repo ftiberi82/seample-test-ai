@@ -1,0 +1,45 @@
+trigger: 
+  branches:
+    include:
+      - develop
+      - feature/*
+      - fix/*
+      - release/*
+      - hotfix/*
+    exclude: 
+    - 'main'
+  paths:
+    include:
+      - '*'
+    exclude:
+      - azure-pipelines.yml
+
+resources:
+  repositories:
+    - repository: ci-templates        # alias a tua scelta
+      type: git
+      name: Templates/ci-templates    # Progetto/Repo dei template
+      ref: refs/heads/main            # branch dove risiedono i template
+
+pool: LinuxPool
+
+stages:
+  # MAIN
+#  - ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
+#    - template: gitflow/stage-gitflow-main-pipeline.yml@ci-templates
+#
+  # DEVELOP
+  - ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
+    - template: java/stages/stage-gitflow-develop-pipeline.yml@ci-templates
+
+  # FEATURE/, FIX/*
+  - ${{ if or(startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/fix/')) }}:
+    - template: java/stages/stage-gitflow-develop-branches-with-deploy.yml@ci-templates
+#
+#  # RELEASE/*
+#  - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/release/') }}:
+#    - template: gitflow/stage-gitflow-release-pipeline.yml@ci-templates
+#
+#  # HOTFIX/*
+#  - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix/') }}:
+#    - template: gitflow/stage-gitflow-hotfix-pipeline.yml@ci-templates
