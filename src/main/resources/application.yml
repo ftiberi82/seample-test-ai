@@ -16,7 +16,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-    show-sql: ${log_show_sql}
+    show-sql: false
     properties:
       hibernate:
         default-schema: account
