@@ -6,6 +6,10 @@ import lombok.*;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+/**
+ * Unità organizzativa (tabella ORGANIZATION) potenzialmente annidata tramite relazione ricorsiva
+ * (campo pid) e classificata da un {@link OrganizationType}.
+ */
 @Getter
 @Setter
 @Builder

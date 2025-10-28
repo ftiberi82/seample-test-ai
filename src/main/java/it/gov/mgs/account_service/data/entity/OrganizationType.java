@@ -6,6 +6,11 @@ import lombok.*;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+/**
+ * Rappresenta una tipologia (livello) organizzativa (tabella ORGANIZATION_TYPE).
+ * Ogni record definisce un livello gerarchico utilizzato per classificare le
+ * organizzazioni (es. Ministero, Direzione, Ufficio ...).
+ */
 @Getter
 @Setter
 @Builder

@@ -6,6 +6,9 @@ import lombok.*;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+/**
+ * Ruolo funzionale (tabella ROLE) che aggrega uno o più {@link Permission}.
+ */
 @Getter
 @Setter
 @Builder

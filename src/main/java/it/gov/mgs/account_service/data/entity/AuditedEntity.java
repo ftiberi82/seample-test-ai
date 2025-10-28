@@ -9,8 +9,11 @@ import lombok.Setter;
 import java.time.OffsetDateTime;
 
 /**
- * Base astratta per le entità con campi di auditing e periodi di validità temporale.
- * I campi sono marcati insertable/updatable = false dove vengono popolati da default/triggers lato DB.
+ * Base astratta per le entità con campi di auditing e informazioni di versioning/validità temporale.
+ * <p>
+ * I campi sono popolati dal database (DEFAULT, TRIGGER, system-versioned temporal tables) e quindi
+ * marcati {@code insertable = false} e {@code updatable = false} per evitare modifiche lato applicazione.
+ * </p>
  */
 @Getter
 @Setter

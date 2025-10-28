@@ -7,6 +7,10 @@ import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+/**
+ * Associazione molti-a-molti tra {@link Role} e {@link Permission} (tabella ROLE_PERMISSION)
+ * modellata tramite chiave composta embedded.
+ */
 @Getter
 @Setter
 @Builder

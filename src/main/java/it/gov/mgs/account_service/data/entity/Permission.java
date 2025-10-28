@@ -6,6 +6,9 @@ import lombok.*;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+/**
+ * Permesso atomico (tabella PERMISSION) che rappresenta una singola capability assegnabile a un {@link Role}.
+ */
 @Getter
 @Setter
 @Builder

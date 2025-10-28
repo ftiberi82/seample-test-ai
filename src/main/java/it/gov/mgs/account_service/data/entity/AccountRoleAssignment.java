@@ -6,6 +6,10 @@ import lombok.*;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+/**
+ * Assegnazione di un {@link Role} ad un {@link Account} opzionalmente limitata ad una
+ * specifica {@link Organization} (tabella ACCOUNT_ROLE_ASSIGNMENT). Include stato attivo ed ultimo login.
+ */
 @Getter
 @Setter
 @Builder

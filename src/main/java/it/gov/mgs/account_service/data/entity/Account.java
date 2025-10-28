@@ -6,6 +6,10 @@ import lombok.*;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+/**
+ * Account applicativo (tabella ACCOUNT) identificato da uno username e dallo stato di attivazione.
+ * I campi di auditing/validità sono ereditati da {@link AuditedEntity}.
+ */
 @Getter
 @Setter
 @Builder
