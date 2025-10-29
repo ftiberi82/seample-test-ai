@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Associazione molti-a-molti tra {@link Role} e {@link Permission} (tabella ROLE_PERMISSION)
- * modellata tramite chiave composta embedded.
+ * Many-to-many association between {@link Role} and {@link Permission} (ROLE_PERMISSION table)
+ * modeled via embedded composite key.
  */
 @Getter
 @Setter

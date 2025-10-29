@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Assegnazione di un {@link Role} ad un {@link Account} opzionalmente limitata ad una
- * specifica {@link Organization} (tabella ACCOUNT_ROLE_ASSIGNMENT). Include stato attivo ed ultimo login.
+ * Assignment of a {@link Role} to an {@link Account}, optionally limited to a specific {@link Organization}
+ * (ACCOUNT_ROLE_ASSIGNMENT table). Includes active status and last login.
  */
 @Getter
 @Setter

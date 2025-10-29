@@ -1,14 +1,25 @@
 package it.gov.mgs.account_service.data.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
- * Unità organizzativa (tabella ORGANIZATION) potenzialmente annidata tramite relazione ricorsiva
- * (campo pid) e classificata da un {@link OrganizationType}.
+ * Organizational unit (ORGANIZATION table) potentially nested via recursive relationship (pid field)
+ * and classified by an {@link OrganizationType}.
  */
 @Getter
 @Setter

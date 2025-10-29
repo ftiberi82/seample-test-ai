@@ -15,9 +15,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Rappresenta una tipologia (livello) organizzativa (tabella ORGANIZATION_TYPE).
- * Ogni record definisce un livello gerarchico utilizzato per classificare le
- * organizzazioni (es. Ministero, Direzione, Ufficio ...).
+ * Represents an organizational type (level) (ORGANIZATION_TYPE table).
+ * Each record defines a hierarchical level used to classify organizations (e.g., Ministry, Directorate, Office, ...).
  */
 @Getter
 @Setter

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Ruolo funzionale (tabella ROLE) che aggrega uno o più {@link Permission}.
+ * Functional role (ROLE table) that aggregates one or more {@link Permission}.
  */
 @Getter
 @Setter

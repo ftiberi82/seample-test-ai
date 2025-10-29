@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Permesso atomico (tabella PERMISSION) che rappresenta una singola capability assegnabile a un {@link Role}.
+ * Atomic permission (PERMISSION table) representing a single capability assignable to a {@link Role}.
  */
 @Getter
 @Setter

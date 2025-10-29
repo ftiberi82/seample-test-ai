@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Account applicativo (tabella ACCOUNT) identificato da uno username e dallo stato di attivazione.
- * I campi di auditing/validità sono ereditati da {@link AuditedEntity}.
+ * Application account (ACCOUNT table) identified by a username and activation status.
+ * Auditing/validity fields are inherited from {@link AuditedEntity}.
  */
 @Getter
 @Setter
