@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: account-service
+  datasource:
+    url: jdbc:sqlserver://db-sql-win01:1433;databaseName=master;encrypt=false;trustServerCertificate=true
+    username: sa
+    password: Accenture.1!
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+    hikari:
+      minimum-idle: 4
+      maximum-pool-size: 6
+      connection-timeout: 20000
+      max-lifetime: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        default-schema: account
+
+  flyway:
+    enabled: true
+    schemas:
+      - ${spring.jpa.properties.hibernate.default-schema}
+    placeholders:
+      schema: ${spring.jpa.properties.hibernate.default-schema}
+    placeholder-replacement: true
+    placeholder-prefix: '${'
+    placeholder-suffix: '}'
+
+server:
+  servlet:
+    context-path: /account
+
+logging:
+  level:
+    application: INFO
+    root: INFO
